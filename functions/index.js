@@ -29,7 +29,7 @@ exports.createCheckout = onRequest((request, response) => {
     data: {
       customer: {
         phone: {country: '55', area: '48', number: '998421117'},
-        Name: 'Thiago Alves Goulart',
+        name: 'Thiago Alves Goulart',
         email: 'thiagoalgo@gmail.com',
         tax_id: '04076073908'
       },
@@ -37,12 +37,12 @@ exports.createCheckout = onRequest((request, response) => {
       customer_modifiable: true,
       items: [
         {
-          image_url: 'https://www.petz.com.br/blog//wp-content/upload/2018/09/tamanho-de-cachorro-pet-1.jpg',
+          image_url: 'https://cdn-repercussaoparanhana.nuneshost.com/wp-content/uploads/2022/03/lousas-1140x570.jpg',
           quantity: 1,
           unit_amount: 19997,
-          name: 'Item name',
+          name: 'Curso Standard',
           reference_id: '123456',
-          description: 'Item Description'
+          description: 'O melhor curso do Brasil'
         }
       ],
       soft_descriptor: 'Standard',
@@ -63,55 +63,13 @@ exports.createCheckout = onRequest((request, response) => {
     response.send(resp.data)
   })
   .catch(function (error) {
-    //console.error(error);
+    console.error(error);
     response.json(error)
-  });
+  })
 
+})
 
-  // const data = request.body
-  // response.json(data)
-
-});
-
-
-
-// const options = {
-//   method: 'POST',
-//   url: 'https://sandbox.api.pagseguro.com/checkouts',
-//   headers: {
-//     accept: '*/*',
-//     Authorization: 'Bearer 9e6d20d5-fba1-4891-850d-62586a321fcf9b40aa804de0af13b0f87885521402c632cb-af94-4746-bca2-90880ba6eaf4',
-//     'Content-type': 'application/json'
-//   },
-//   data: {
-//     customer: {
-//       phone: {country: '55', area: '48', number: '998421117'},
-//       Name: 'Thiago Alves Goulart',
-//       email: 'thiagoalgo@gmail.com',
-//       tax_id: '04076073908'
-//     },
-//     reference_id: 'order-id-123456',
-//     customer_modifiable: true,
-//     items: [{reference_id: 'product-id-0123'}],
-//     soft_descriptor: 'Standard',
-//     additional_amount: 0,
-//     discount_amount: 0,
-//     payment_methods: [{type: 'CREDIT_CARD'}, {type: 'DEBIT_CARD'}, {type: 'BOLETO'}, {type: 'PIX'}],
-//     payment_methods_configs: [
-//       {
-//         type: 'CREDIT_CARD',
-//         config_options: [{option: 'INSTALLMENTS_LIMIT', value: '1'}]
-//       }
-//     ],
-//     redirect_url: 'https://www.google.com'
-//   }
-// };
-
-// axios
-//   .request(options)
-//   .then(function (response) {
-//     console.log(response.data);
-//   })
-//   .catch(function (error) {
-//     console.error(error);
-//   });
+exports.paymentNotificarion = onRequest((request, response) => {
+  console.log(request.data)
+  response(request.data)
+})
