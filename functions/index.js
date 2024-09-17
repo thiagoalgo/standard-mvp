@@ -17,27 +17,8 @@ exports.createCheckout = onRequest((request, response) => {
     return
   }
 
-  console.log(request.body)
-
   const data = {
-    // customer: {
-    //   phone: {country: '55', area: '48', number: '998421117'},
-    //   name: 'Thiago Alves Goulart',
-    //   email: 'thiagoalgo@gmail.com',
-    //   tax_id: '04076073908'
-    // },
-    // reference_id: 'order-id-123456',
     customer_modifiable: true,
-    // items: [
-    //   {
-    //     image_url: 'https://cdn-repercussaoparanhana.nuneshost.com/wp-content/uploads/2022/03/lousas-1140x570.jpg',
-    //     quantity: 1,
-    //     unit_amount: 19997,
-    //     name: 'Curso Standard',
-    //     reference_id: '123456',
-    //     description: 'O melhor curso do Brasil'
-    //   }
-    // ],
     soft_descriptor: 'Standard',
     additional_amount: 0,
     discount_amount: 0,
@@ -77,7 +58,19 @@ exports.createCheckout = onRequest((request, response) => {
 
 })
 
-exports.paymentNotificarion = onRequest((request, response) => {
-  console.log(request.data)
-  response(request.data)
+exports.paymentNotification = onRequest((request, response) => {
+  if (request.method !== 'POST') {
+    response.sendStatus(405)
+    return
+  }
+
+  if (request.body.charges[0]?.status == 'PAID') {
+    // aqui cadastrar o usuário no firebase
+    // enviar email com dados de acesso
+    console.log(request.body.charges[0]?.status)
+    response.sendStatus(200)
+    return
+  }
+  
+  response.sendStatus(500)
 })
