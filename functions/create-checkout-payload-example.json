@@ -1,0 +1,23 @@
+{
+    "reference_id": "order-id-123456",
+    "customer": {
+        "name": "João da Silva",
+        "email": "joao@gmail.com",
+        "tax_id": "47005543041",
+        "phone": {
+            "country": "55",
+            "area": "48",
+            "number": "998431727"
+        }
+    },
+    "items": [
+        {
+            "reference_id": "123456",
+            "name": "Curso Standard",
+            "quantity": 1,
+            "description": "O melhor curso do Brasil",
+            "unit_amount": 19997,
+            "image_url": "https://cdn-repercussaoparanhana.nuneshost.com/wp-content/uploads/2022/03/lousas-1140x570.jpg"
+        }
+    ]
+}

@@ -17,6 +17,44 @@ exports.createCheckout = onRequest((request, response) => {
     return
   }
 
+  console.log(request.body)
+
+  const data = {
+    // customer: {
+    //   phone: {country: '55', area: '48', number: '998421117'},
+    //   name: 'Thiago Alves Goulart',
+    //   email: 'thiagoalgo@gmail.com',
+    //   tax_id: '04076073908'
+    // },
+    // reference_id: 'order-id-123456',
+    customer_modifiable: true,
+    // items: [
+    //   {
+    //     image_url: 'https://cdn-repercussaoparanhana.nuneshost.com/wp-content/uploads/2022/03/lousas-1140x570.jpg',
+    //     quantity: 1,
+    //     unit_amount: 19997,
+    //     name: 'Curso Standard',
+    //     reference_id: '123456',
+    //     description: 'O melhor curso do Brasil'
+    //   }
+    // ],
+    soft_descriptor: 'Standard',
+    additional_amount: 0,
+    discount_amount: 0,
+    payment_methods: [{type: 'CREDIT_CARD'}, {type: 'DEBIT_CARD'}, {type: 'BOLETO'}, {type: 'PIX'}],
+    payment_methods_configs: [
+      {
+        type: 'CREDIT_CARD',
+        config_options: [{option: 'INSTALLMENTS_LIMIT', value: '1'}]
+      }
+    ],
+    redirect_url: 'https://www.google.com'
+  }
+
+  data.reference_id = request.body.reference_id
+  data.customer = request.body.customer
+  data.items = request.body.items
+
   axios
   .request({
     method: 'POST',
@@ -26,37 +64,7 @@ exports.createCheckout = onRequest((request, response) => {
       Authorization: 'Bearer 9e6d20d5-fba1-4891-850d-62586a321fcf9b40aa804de0af13b0f87885521402c632cb-af94-4746-bca2-90880ba6eaf4',
       'Content-type': 'application/json'
     },
-    data: {
-      customer: {
-        phone: {country: '55', area: '48', number: '998421117'},
-        name: 'Thiago Alves Goulart',
-        email: 'thiagoalgo@gmail.com',
-        tax_id: '04076073908'
-      },
-      reference_id: 'order-id-123456',
-      customer_modifiable: true,
-      items: [
-        {
-          image_url: 'https://cdn-repercussaoparanhana.nuneshost.com/wp-content/uploads/2022/03/lousas-1140x570.jpg',
-          quantity: 1,
-          unit_amount: 19997,
-          name: 'Curso Standard',
-          reference_id: '123456',
-          description: 'O melhor curso do Brasil'
-        }
-      ],
-      soft_descriptor: 'Standard',
-      additional_amount: 0,
-      discount_amount: 0,
-      payment_methods: [{type: 'CREDIT_CARD'}, {type: 'DEBIT_CARD'}, {type: 'BOLETO'}, {type: 'PIX'}],
-      payment_methods_configs: [
-        {
-          type: 'CREDIT_CARD',
-          config_options: [{option: 'INSTALLMENTS_LIMIT', value: '1'}]
-        }
-      ],
-      redirect_url: 'https://www.google.com'
-    }
+    data: data
   })
   .then(function (resp) {
     console.log(resp.data);
